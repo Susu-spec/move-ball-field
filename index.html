@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css" />
+    <title>Move the Ball</title>
+    <meta name="description" content="Move the Ball across the field!">
+    <meta name="keywords" content="Football" >
+    <meta name="author" content="Suwaibat Suleiman">
+
+    <meta property="og:title" content="Move the Ball">
+    <meta property="og:description" content="Move the Ball across the field">
+
+    
+</head>
+<body>
+    <header>
+        <div id="scoreboard">
+            <p>Score:</p>
+            <span id="score">0</span>
+        </div>
+    </header>
+    <main>
+        <div id="field">
+          <img src="./assets/soccer-ball.svg" id="ball" >
+          <div class="line"></div>
+          <img src="./assets/goalpost.png" id="goalpost" >
+        </div>
+    </main>
+    <script>
+        const field = document.getElementById('field');
+        const ball = document.getElementById('ball');
+        const goalpost = document.getElementById('goalpost');
+        const scoreEl = document.getElementById('score');
+        let score = 0;
+
+        field.addEventListener('click', (event) => {
+            const fieldPositions = field.getBoundingClientRect();
+            let positionX = event.clientX - fieldPositions.left;
+            let positionY = event.clientY - fieldPositions.top;
+
+            ball.style.left = `${positionX - ball.offsetWidth / 2}px`;
+            ball.style.top = `${positionY - ball.offsetHeight / 2}px`;
+
+            setTimeout(() => {
+                checkGoal();
+            }, 10);
+        })
+
+
+        function checkGoal() {
+        const ballRect = ball.getBoundingClientRect();
+        const goalRect = goalpost.getBoundingClientRect();
+
+        const ballCenterX = ballRect.left + ballRect.width / 2;
+        const ballCenterY = ballRect.top + ballRect.height / 2;
+
+        const isInGoal =
+        ballCenterX >= goalRect.left &&
+        ballCenterX <= goalRect.right &&
+        ballCenterY >= goalRect.top &&
+        ballCenterY <= goalRect.bottom;
+
+        if (isInGoal) {
+            score += 10;
+            scoreEl.textContent = score;
+        }
+    }
+    </script>  
+</body>
+</html>
