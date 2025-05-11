@@ -60,7 +60,7 @@ header {
 #ball {
     cursor: pointer;
     position: absolute;
-    transition: all ease-in-out 0.5s;
+    /* transition: all ease-in-out 0.5s; */
     height: auto;
     z-index: 2;
     box-shadow:  0 25px 50px -12px rgb(0 0 0 / 0.25);

@@ -29,44 +29,49 @@
         </div>
     </main>
     <script>
-        const field = document.getElementById('field');
-        const ball = document.getElementById('ball');
-        const goalpost = document.getElementById('goalpost');
-        const scoreEl = document.getElementById('score');
+        let field = document.getElementById('field');
+        let ball = document.getElementById('ball');
+        let goalpost = document.getElementById('goalpost');
+        let scoreEl = document.getElementById('score');
         let score = 0;
 
         field.addEventListener('click', (event) => {
-            const fieldPositions = field.getBoundingClientRect();
+            let fieldPositions = field.getBoundingClientRect();
             let positionX = event.clientX - fieldPositions.left;
             let positionY = event.clientY - fieldPositions.top;
 
             ball.style.left = `${positionX - ball.offsetWidth / 2}px`;
             ball.style.top = `${positionY - ball.offsetHeight / 2}px`;
 
-            setTimeout(() => {
-                checkGoal();
-            }, 10);
-        })
+            void ball.offsetHeight;
+
+
+            requestAnimationFrame(checkGoal);
+
+})
 
 
         function checkGoal() {
-        const ballRect = ball.getBoundingClientRect();
-        const goalRect = goalpost.getBoundingClientRect();
+            let ballRect = ball.getBoundingClientRect();
+            let goalRect = goalpost.getBoundingClientRect();
 
-        const ballCenterX = ballRect.left + ballRect.width / 2;
-        const ballCenterY = ballRect.top + ballRect.height / 2;
+            let ballCenterX = ballRect.left + ballRect.width / 2;
+            let ballCenterY = ballRect.top + ballRect.height / 2;
 
-        const isInGoal =
-        ballCenterX >= goalRect.left &&
-        ballCenterX <= goalRect.right &&
-        ballCenterY >= goalRect.top &&
-        ballCenterY <= goalRect.bottom;
+            let isInGoal = false;
+            isInGoal =
+                ballRect.left >= goalRect.left &&
+                ballRect.right <= goalRect.right &&
+                ballRect.top >= goalRect.top &&
+                ballRect.bottom <= goalRect.bottom;
 
-        if (isInGoal) {
-            score += 10;
-            scoreEl.textContent = score;
+
+            if (isInGoal) {
+
+                score += 10;
+                scoreEl.textContent = score;
+            }
         }
-    }
     </script>  
 </body>
 </html>
